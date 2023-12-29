@@ -2,6 +2,7 @@ package next.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Before;
@@ -33,6 +34,14 @@ public class UserDaoTest {
         userDao.update(expected);
         actual = userDao.findByUserId(expected.getUserId());
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void findById() throws SQLException {
+        UserDao userDao = new UserDao();
+        userDao.insert(new User("javajigi", "password", "name", "123@naver.com"));
+        User user = userDao.findByUserId("javajigi");
+        assertEquals("javajigi", user.getUserId());
     }
 
     @Test
